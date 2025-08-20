@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESLSCA University - Student Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #1a3a8f, #1e4fd8);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-img-placeholder {
+            font-size: 36px;
+            color: #1a3a8f;
+        }
+        
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        .menu-item {
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .menu-item.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #fff;
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        /* Main Content Styling */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-logo-img {
+            width: 50px;
+            height: 50px;
+            background-color: #1a3a8f;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            align-items: center;
+        }
+        
+        .welcome {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-right: 20px;
+        }
+        
+        .student-id-header {
+            font-size: 16px;
+            background: #f0f5ff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: #1a3a8f;
+            font-weight: 500;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid #1e4fd8;
+        }
+        
+        /* Dashboard Cards */
+        .dashboard-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-input {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            width: 200px;
+            margin-left: 10px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1a3a8f;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-title i {
+            margin-right: 10px;
+        }
+        
+        /* Student ID Section */
+        .student-id {
+            font-size: 18px;
+            font-weight: 500;
+            background: #f0f5ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1e4fd8;
+            display: flex;
+            align-items: center;
+        }
+        
+        .student-id-logo {
+            width: 40px;
+            height: 40px;
+            background-color: #1a3a8f;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+        }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #1a3a8f, #1e4fd8);
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 79, 216, 0.3);
+        }
+        
+        .action-btn i {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        /* Requests Section */
+        .requests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .request-item {
+            background: #f9fafc;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #1e4fd8;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .request-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .request-details {
+            display: flex;
+            justify-content: space-between;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .status.paid {
+            background: #e6f7ee;
+            color: #27ae60;
+        }
+        
+        .status.pending {
+            background: #fef5e7;
+            color: #f39c12;
+        }
+        
+        .status.canceled {
+            background: #fdecea;
+            color: #e74c3c;
+        }
+        
+        .status.approved {
+            background: #e6f7ee;
+            color: #27ae60;
+        }
+        
+        .action-buttons {
+            display: flex;
+            margin-top: 10px;
+            gap: 10px;
+        }
+        
+        .details-btn, .pay-btn, .cancel-btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .details-btn {
+            background: #e6f7ff;
+            color: #3498db;
+        }
+        
+        .pay-btn {
+            background: #e6f7ee;
+            color: #27ae60;
+        }
+        
+        .cancel-btn {
+            background: #fdecea;
+            color: #e74c3c;
+        }
+        
+        .details-btn:hover, .pay-btn:hover, .cancel-btn:hover {
+            opacity: 0.8;
+        }
+        
+        /* Medical Excuse */
+        .medical-excuse {
+            background: #f0f9ff;
+            border-left: 4px solid #3498db;
+        }
+        
+        /* Request Details Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            color: #1a3a8f;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 12px;
+        }
+        
+        .detail-label {
+            width: 120px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .detail-value {
+            flex: 1;
+            color: #7f8c8d;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            border-top: 1px solid #eaecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-logo {
+            width: 30px;
+            height: 30px;
+            background-color: #1a3a8f;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a3a8f, #1e4fd8);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                padding: 10px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 900;
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .logo {
+                flex-direction: row;
+                justify-content: center;
+                padding: 10px 0;
+            }
+            
+            .logo-img {
+                width: 60px;
+                height: 60px;
+                margin-right: 15px;
+                margin-bottom: 0;
+            }
+            
+            .main-content {
+                padding: 20px;
+                width: 100%;
+            }
+            
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .header-logo {
+                margin-bottom: 15px;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .student-id-header {
+                margin-top: 5px;
+            }
+            
+            .user-info {
+                margin-top: 15px;
+            }
+            
+            .dashboard-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .search-container {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .requests-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="logo">
+                <div class="logo-img">
+                    <div class="logo-img-placeholder">
+                        <i class="fas fa-university"></i>
+                    </div>
+                </div>
+                <h1>ESLSCA University</h1>
+            </div>
+            
+            <div class="menu-item active">
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-user-graduate"></i>
+                <span>Academic Record</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-file-alt"></i>
+                <span>Documents</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Schedule</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Financials</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </div>
+            
+            <div class="menu-item">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="header-logo">
+                    <div class="header-logo-img">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="dashboard-header">
+                        <div class="welcome">Dashboard</div>
+                        <div class="student-id-header">ID: 242500033</div>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <img src="https://ui-avatars.com/api/?name=Noureen+Hatem&background=1e4fd8&color=fff" alt="User">
+                    <div>
+                        <div>Noureen Hatem</div>
+                        <div style="font-size: 12px; color: #7f8c8d;">Student</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fas fa-bolt"></i> Quick Actions</span>
+                </div>
+                <div class="quick-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-file-download"></i> Request Document
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-file-medical"></i> Apply for Excuse
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-book"></i> Course Registration
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-calendar-check"></i> Schedule View
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Requests -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fas fa-clipboard-list"></i> Recent Requests</span>
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="search-input" placeholder="Search requests...">
+                    </div>
+                </div>
+                <div class="requests-grid">
+                    <div class="request-item">
+                        <div class="request-title">Enrollment Letter</div>
+                        <div class="request-details">
+                            <span>Date: 2025-07-13</span>
+                            <span class="status paid">Paid</span>
+                        </div>
+                        <div class="status pending">Pending Approval</div>
+                        <div class="action-buttons">
+                            <button class="details-btn" onclick="showDetails('enrollment-letter')">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                            <button class="cancel-btn">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="request-item">
+                        <div class="request-title">Transcript Request</div>
+                        <div class="request-details">
+                            <span>Date: 2025-07-10</span>
+                            <span class="status canceled">No Payment</span>
+                        </div>
+                        <div class="status canceled">Canceled</div>
+                        <div class="action-buttons">
+                            <button class="details-btn" onclick="showDetails('transcript')">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                            <button class="pay-btn">
+                                <i class="fas fa-credit-card"></i> Pay Now
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="request-item">
+                        <div class="request-title">Course Change</div>
+                        <div class="request-details">
+                            <span>Date: 2025-07-05</span>
+                            <span class="status paid">Paid</span>
+                        </div>
+                        <div class="status approved">Approved</div>
+                        <div class="action-buttons">
+                            <button class="details-btn" onclick="showDetails('course-change')">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Medical Excuse -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fas fa-heartbeat"></i> Medical Excuse</span>
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="search-input" placeholder="Search excuses...">
+                    </div>
+                </div>
+                <div class="request-item medical-excuse">
+                    <div class="request-title">Medical Excuse Request</div>
+                    <div class="request-details">
+                        <span>Date: 2025-02-17</span>
+                        <span class="status approved">Approved</span>
+                    </div>
+                    <div>Duration: 3 days (Feb 17-19, 2025)</div>
+                    <div class="action-buttons">
+                        <button class="details-btn" onclick="showDetails('medical-excuse')">
+                            <i class="fas fa-info-circle"></i> Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-logo">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div>ESLSCA University Service Portal © 2025</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="mobile-menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Request Details</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody">
+                <!-- Details will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle mobile sidebar
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target) &&
+                sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+        
+        // Show details modal
+        function showDetails(type) {
+            const modal = document.getElementById('detailsModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            let detailsHTML = '';
+            
+            switch(type) {
+                case 'enrollment-letter':
+                    detailsHTML = `
+                        <div class="detail-row">
+                            <div class="detail-label">Type:</div>
+                            <div class="detail-value">Enrollment Letter</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Date:</div>
+                            <div class="detail-value">2025-07-13</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Language:</div>
+                            <div class="detail-value">English</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Quantity:</div>
+                            <div class="detail-value">1</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Institute:</div>
+                            <div class="detail-value">For embassy</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Department:</div>
+                            <div class="detail-value">No Department</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Payment Ticket:</div>
+                            <div class="detail-value">100090</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Status:</div>
+                            <div class="detail-value"><span class="status pending">Pending Approval</span></div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'transcript':
+                    detailsHTML = `
+                        <div class="detail-row">
+                            <div class="detail-label">Type:</div>
+                            <div class="detail-value">Transcript Request</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Date:</div>
+                            <div class="detail-value">2025-07-10</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Language:</div>
+                            <div class="detail-value">English & Arabic</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Quantity:</div>
+                            <div class="detail-value">2</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Institute:</div>
+                            <div class="detail-value">Graduate Studies</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Department:</div>
+                            <div class="detail-value">Student Affairs</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Payment Ticket:</div>
+                            <div class="detail-value">100091 (Not Paid)</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Status:</div>
+                            <div class="detail-value"><span class="status canceled">Canceled</span></div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'course-change':
+                    detailsHTML = `
+                        <div class="detail-row">
+                            <div class="detail-label">Type:</div>
+                            <div class="detail-value">Course Change Request</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Date:</div>
+                            <div class="detail-value">2025-07-05</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">From Course:</div>
+                            <div class="detail-value">Business Ethics</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">To Course:</div>
+                            <div class="detail-value">Digital Marketing</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Reason:</div>
+                            <div class="detail-value">Schedule conflict with work</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Department:</div>
+                            <div class="detail-value">Academic Affairs</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Payment Ticket:</div>
+                            <div class="detail-value">100088</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Status:</div>
+                            <div class="detail-value"><span class="status approved">Approved</span></div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'medical-excuse':
+                    detailsHTML = `
+                        <div class="detail-row">
+                            <div class="detail-label">Type:</div>
+                            <div class="detail-value">Medical Excuse</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Date:</div>
+                            <div class="detail-value">2025-02-17</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Duration:</div>
+                            <div class="detail-value">3 days (Feb 17-19, 2025)</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Doctor:</div>
+                            <div class="detail-value">Dr. Ahmed Mostafa</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Clinic/Hospital:</div>
+                            <div class="detail-value">Al-Salam International Hospital</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Reason:</div>
+                            <div class="detail-value">Severe flu with high fever</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Department:</div>
+                            <div class="detail-value">Student Affairs</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Status:</div>
+                            <div class="detail-value"><span class="status approved">Approved</span></div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            modalBody.innerHTML = detailsHTML;
+            modal.style.display = 'flex';
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('detailsModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('detailsModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Simulate payment process
+        document.querySelectorAll('.pay-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Redirecting to payment gateway...');
+            });
+        });
+        
+        // Simulate cancel process
+        document.querySelectorAll('.cancel-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to cancel this request?')) {
+                    alert('Request has been canceled.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
