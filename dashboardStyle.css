@@ -80,6 +80,11 @@
             margin-right: 10px;
             font-size: 18px;
         }
+
+        .menu-item a{
+            text-decoration: none;
+            color: white;
+        }
         
         /* Main Content Styling */
         .main-content {

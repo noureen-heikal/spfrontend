@@ -64,7 +64,13 @@ body {
     display: flex;
     align-items: center;
     transition: all 0.3s;
+    
     cursor: pointer;
+}
+
+.menu-item a{
+    text-decoration: none;
+    color: white;
 }
 
 .menu-item:hover {
@@ -193,9 +199,7 @@ margin-left: 10px;
     margin: auto;
     margin-top: 0px;
     font-weight: bold;
-    color: white;
-    background-color: #1e4fd8;
-    padding: 10px;
+    color: #1e4fd8;
     border-radius: 10px;
 }
 
