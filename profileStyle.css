@@ -1,135 +1,135 @@
 * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-        
-        /* Sidebar Styling */
-        .sidebar {
-            width: 250px;
-            background: linear-gradient(135deg, #1a3a8f, #1e4fd8);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .logo {
-            text-align: center;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .logo-img {
-            width: 80px;
-            height: 80px;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .logo-img-placeholder {
-            font-size: 36px;
-            color: #1a3a8f;
-        }
-        
-        .logo h1 {
-            font-size: 22px;
-            font-weight: 600;
-            margin-top: 5px;
-        }
-        
-        .menu-item {
-            padding: 15px 25px;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .menu-item:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .menu-item.active {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-left: 4px solid #fff;
-        }
-        
-        .menu-item i {
-            margin-right: 10px;
-            font-size: 18px;
-        }
-        
-        /* Main Content Styling */
-        .main-content {
-            flex: 1;
-            padding: 30px;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        
-        .header-logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .header-logo-img {
-            width: 50px;
-            height: 50px;
-            background-color: #1a3a8f;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            color: white;
-            font-size: 24px;
-        }
-        
-        .dashboard-header {
-            display: flex;
-            align-items: center;
-        }
-        
-        .welcome {
-            font-size: 24px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-right: 20px;
-        }
-        
-        .student-id-header {
-            font-size: 16px;
-            background: #f0f5ff;
-            padding: 8px 15px;
-            border-radius: 20px;
-           
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(135deg, #1a3a8f, #1e4fd8);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.logo {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-img {
+    width: 80px;
+    height: 80px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo-img-placeholder {
+    font-size: 36px;
+    color: #1a3a8f;
+}
+
+.logo h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.menu-item {
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-left: 4px solid #fff;
+}
+
+.menu-item i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo-img {
+    width: 50px;
+    height: 50px;
+    background-color: #1a3a8f;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: white;
+    font-size: 24px;
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+}
+
+.welcome {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-right: 20px;
+}
+
+.student-id-header {
+    font-size: 16px;
+    background: #f0f5ff;
+    padding: 8px 15px;
+    border-radius: 20px;
+   
 color: #1a3a8f;
 font-weight: 500;
 }
@@ -173,9 +173,36 @@ width: 200px;
 margin-left: 10px;
 }
 
+.profile-header{
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.profile-header h1{
+    font-size: 8rem;
+    color: #1e4fd8;
+    margin: auto;
+    margin-bottom: 0px;
+}
+.profile-header p{
+    margin: auto;
+    margin-top: 0px;
+    font-weight: bold;
+    color: white;
+    background-color: #1e4fd8;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 .card {
 background: white;
 border-radius: 10px;
+
 padding: 20px;
 margin-bottom: 25px;
 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -222,7 +249,10 @@ color: white;
 
 /* Quick Actions */
 .quick-actions {
-display: grid;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 gap: 15px;
 margin-top: 15px;
@@ -231,6 +261,7 @@ margin-top: 15px;
 .action-btn {
 background: linear-gradient(135deg, #1a3a8f, #1e4fd8);
 color: white;
+width: 33%;
 border: none;
 padding: 12px 15px;
 border-radius: 8px;
